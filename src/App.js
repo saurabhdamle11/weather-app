@@ -5,8 +5,6 @@ import WeatherCard from './components/WeatherCard/WeatherCard';
 import { getWeatherByCity } from './services/weatherService';
 import { Container, Box, Typography, CircularProgress, Alert } from "@mui/material";
 
-
-
 function App() {
 
 	const [weather, setWeather] = useState(null);
@@ -24,7 +22,7 @@ function App() {
 			setWeather({
 				city:data.name,
 				temp:data.main.temp,
-				description:data.weather[0].descripption,
+				description:data.weather[0].description,
 			});
 		}
 		catch(err){
@@ -50,7 +48,7 @@ function App() {
 			align="center"
 			gutterBottom
 		>
-			Weather App 🌤️
+			Weather watch 🌤️
 		</Typography>
 
 		{/* Search */}
