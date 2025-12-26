@@ -1,19 +1,18 @@
 import axios from "axios";
 
-const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getWeatherByCity = async (city) => {
-    console.log("API KEY:", WEATHER_API_KEY);
-    const response = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather",
-    {
-      params: {
-        q: city,
-        appid: WEATHER_API_KEY,
-        units: "metric",
-      },
+    try {
+        const response = await axios.get(`${API_BASE_URL}/weather/${city}`);
+        
+        console.log("API response:", response.data);
+        console.log("Cached:", response.data.cached);
+        console.log("Remaining calls:", response.data.stats.remainingCalls);
+        
+        return response.data.data;
+    } catch (error) {
+        console.error("Weather API error:", error.response?.data || error.message);
+        throw error;
     }
-    );
-    console.log("API response", response);
-    return response.data;
 };
